@@ -1,20 +1,20 @@
 import {defineStore} from 'pinia'
 import axios from '../service/axios'
 
-export const getonepost = defineStore('getonepost', {
+export const updatePost = defineStore('updatepost', {
     state: () => (
         {errMessage: "", status: null}
     ),
     actions: {
-        async getOne(id) {
+        async updateJsonplaceholder(id,payload) {
             try {
-                const response = await axios.get(`/posts/${id}`);
+                console.log(id,payload);
+                const response = await axios.put(`/posts/${id}`,{payload});
                 if (response.status === 200) {
                     const data = response.data;
                     this.status = data.status;
                     console.log(data)
                 }
-
             } catch (e) {
                 console.log(e)
                 this.errMessage = e.message;
